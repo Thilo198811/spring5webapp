@@ -1,5 +1,6 @@
 package guru.springframework.spring5webapp.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,17 +26,24 @@ public class Book {
 	@JoinTable(name = "author_book",
 		joinColumns = @JoinColumn(name = "book_id"),
 		inverseJoinColumns = @JoinColumn(name = "author_id"))
-	private Set<Author> author;
+	private Set<Author> authors = new HashSet<>();
 	
 	public Book() {
 		super();
 	}
-	public Book(String title, String isbn, Set<Author> author) {
+	public Book(String title, String isbn, Set<Author> authors) {
 		super();
 		this.title = title;
 		this.isbn = isbn;
-		this.author = author;
+		this.authors = authors;
 	}
+	
+	public Book(String title, String isbn) {
+		super();
+		this.title = title;
+		this.isbn = isbn;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -48,11 +56,11 @@ public class Book {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	public Set<Author> getAuthor() {
-		return author;
+	public Set<Author> getAuthors() {
+		return authors;
 	}
-	public void setAuthor(Set<Author> author) {
-		this.author = author;
+	public void setAuthors(Set<Author> author) {
+		this.authors = author;
 	}
 	public long getId() {
 		return id;
@@ -79,7 +87,7 @@ public class Book {
 	
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", author=" + author + "]";
+		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", author=" + authors + "]";
 	}
 		
 }
