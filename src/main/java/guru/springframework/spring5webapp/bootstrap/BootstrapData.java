@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import guru.springframework.spring5webapp.domain.Author;
 import guru.springframework.spring5webapp.domain.Book;
+import guru.springframework.spring5webapp.domain.Publisher;
 import guru.springframework.spring5webapp.repository.AuthorRepository;
 import guru.springframework.spring5webapp.repository.BookRepository;
+import guru.springframework.spring5webapp.repository.PublisherRepository;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -18,11 +20,15 @@ public class BootstrapData implements CommandLineRunner {
 
 	private final AuthorRepository authRepository;
 	private final BookRepository bookRepository;
+	private final PublisherRepository publisherRepository;
 		
-	public BootstrapData(AuthorRepository authRepository, BookRepository bookRepository) {
+	public BootstrapData(AuthorRepository authRepository,
+			BookRepository bookRepository,
+			PublisherRepository publisherRepository) {
 		super();
 		this.authRepository = authRepository;
 		this.bookRepository = bookRepository;
+		this.publisherRepository = publisherRepository;
 	}
 
 	@Override
@@ -45,9 +51,10 @@ public class BootstrapData implements CommandLineRunner {
 		bookRepository.save(noEJB);
 		
 		logger.info("Started in bootstrap");
-		logger.info("Number of books: " + bookRepository.count());
+		logger.info("Number of books: {}", bookRepository.count());
 		
-		
+		Publisher publisher = new Publisher("My Pub", "Valhalla Street","Valhalla", "Country", 2143);
+		publisherRepository.save(publisher);
+		logger.info("Number of publishers: {}", publisherRepository.count());
 	}
-
 }

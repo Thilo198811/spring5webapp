@@ -5,11 +5,12 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Publisher {
 	
-	
+	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
@@ -22,9 +23,8 @@ public class Publisher {
 		super();
 	}
 
-	public Publisher(long id, String name, String addressLine1, String city, String state, int zip) {
+	public Publisher(String name, String addressLine1, String city, String state, int zip) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.addressLine1 = addressLine1;
 		this.city = city;
