@@ -1,5 +1,6 @@
 package guru.springframework.spring5webapp.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -73,10 +74,28 @@ public class Author {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
-	
-	
-	
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Author other = (Author) obj;
+		return id == other.id;
+	}
+
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", books=" + books + "]";
+	}
+	
+	
 }
